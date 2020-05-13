@@ -7,7 +7,6 @@ import (
 	"strconv"
 	"strings"
 	"testing"
-	"time"
 
 	"github.com/bxcodec/faker"
 	"github.com/labstack/echo/v4"
@@ -20,7 +19,7 @@ import (
 	"golang.org/x/net/context"
 )
 
-func TestFetch(t *testing.T)  {
+func TestFetch(t *testing.T) {
 	var mockUser models.User
 	err := faker.FakeData(&mockUser)
 	assert.NoError(t, err)
@@ -32,7 +31,7 @@ func TestFetch(t *testing.T)  {
 
 	ctx := context.Background()
 	e := echo.New()
-	mockService.On("All", ctx,  limit, offset).Return(mockListUser, nil)
+	mockService.On("All", ctx, limit, offset).Return(mockListUser, nil)
 	req, err := http.NewRequest(echo.GET, "/users?limit=1&offset=2", strings.NewReader(""))
 	assert.NoError(t, err)
 
@@ -44,13 +43,11 @@ func TestFetch(t *testing.T)  {
 	mockService.AssertExpectations(t)
 }
 
-func TestStore(t *testing.T)  {
+func TestStore(t *testing.T) {
 	mockUser := models.User{
-		Name: "test",
+		Name:  "test",
 		Email: "test@t.cc",
 		Phone: "2345234",
-		CreatedAt: time.Now().String(),
-		UpdatedAt: time.Now().String(),
 	}
 
 	tempMock := mockUser
@@ -77,7 +74,7 @@ func TestStore(t *testing.T)  {
 	mockService.AssertExpectations(t)
 }
 
-func TestGetByID(t *testing.T)  {
+func TestGetByID(t *testing.T) {
 	var mockUser models.User
 	err := faker.FakeData(&mockUser)
 	assert.NoError(t, err)
@@ -88,7 +85,7 @@ func TestGetByID(t *testing.T)  {
 	mockService.On("Get", mock.Anything, int64(num)).Return(&mockUser, nil)
 
 	e := echo.New()
-	req, err := http.NewRequest(echo.GET, "/users/"+ strconv.Itoa(num), strings.NewReader(""))
+	req, err := http.NewRequest(echo.GET, "/users/"+strconv.Itoa(num), strings.NewReader(""))
 	assert.NoError(t, err)
 
 	rec := httptest.NewRecorder()

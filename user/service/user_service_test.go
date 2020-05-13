@@ -13,7 +13,6 @@ import (
 func TestStore(t *testing.T) {
 	mockUserRepo := new(mocks.Repository)
 	mockUser := &models.User{
-		ID:    1,
 		Name:  "surya",
 		Phone: "1234123",
 		Email: "testing@test.cxv",
@@ -42,7 +41,6 @@ func TestAll(t *testing.T) {
 	var users []models.User
 	mockUserRepo := new(mocks.Repository)
 	mockUser := &models.User{
-		ID:    1,
 		Name:  "surya",
 		Phone: "1234123",
 		Email: "testing@test.cxv",
@@ -72,7 +70,6 @@ func TestAll(t *testing.T) {
 func TestGet(t *testing.T) {
 	mockUserRepo := new(mocks.Repository)
 	mockUser := &models.User{
-		ID:    1,
 		Name:  "surya",
 		Phone: "1234123",
 		Email: "testing@test.cxv",
